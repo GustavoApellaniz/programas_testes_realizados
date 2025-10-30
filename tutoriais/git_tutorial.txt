@@ -1,0 +1,84 @@
+| Etapa | Comando                               | Explicação prática                                                                              | Quando usar                                                    |
+| ----- | ------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 1     | `git init`                            | Inicializa um repositório Git **local** dentro da pasta atual. Cria a subpasta `.git/`.         | Apenas **uma vez** no início de um projeto local novo.         |
+| 2     | `git status`                          | Mostra o estado atual: arquivos modificados, adicionados, pendentes de commit etc.              | Use com frequência para saber o que está acontecendo.          |
+| 3     | `git add .`                           | Adiciona todos os arquivos modificados à **área de preparação (staging area)**.                 | Antes de fazer o commit.                                       |
+| 4     | `git commit -m "mensagem"`            | Salva um “snapshot” (versão) do seu código localmente. A mensagem deve descrever a alteração.   | Sempre após adicionar (`git add`) e antes de enviar ao GitHub. |
+| 5     | `git remote add origin <link>`        | Conecta seu repositório local a um repositório **remoto** (GitHub, GitLab etc).                 | Somente uma vez por projeto.                                   |
+| 6     | `git push`                            | Envia os commits locais para o **repositório remoto**.                                          | Após o commit, quando quiser atualizar o GitHub.               |
+| 7     | `git push --set-upstream origin main` | Define o branch remoto principal (upstream) e envia o código.                                   | Primeira vez que fizer push de um branch novo.                 |
+| 8     | `git branch`                          | Lista todas as branches locais e mostra qual está ativa.                                        | Para visualizar ou conferir onde você está.                    |
+| 9     | `git checkout main`                   | Alterna para o branch `main` (ou outro).                                                        | Quando quiser mudar de branch.                                 |
+| 10    | `git pull`                            | Baixa alterações do GitHub para seu branch local.                                               | Antes de começar a trabalhar, ou antes de fazer merge/push.    |
+| 11    | `git merge <branch>`                  | Junta (mergeia) o código de outra branch na branch atual.                                       | Depois de testar e finalizar uma funcionalidade.               |
+| 12    | `git reflog`                          | Mostra o histórico completo de commits e movimentações (útil para recuperar versões).           | Quando precisar voltar a uma versão anterior.                  |
+| 13    | `git reset --hard <código>`           | Volta para uma versão específica e descarta alterações locais.                                  | **Use com cuidado**, pois apaga mudanças não commitadas.       |
+| 14    | `touch .gitignore`                    | Cria o arquivo `.gitignore`, que define o que o Git deve ignorar (ex: `.env`, `node_modules/`). | Logo no início do projeto.                                     |
+
+Criar e usar uma nova branch
+git pull           # garante que a main está atualizada
+git checkout -b nova-feature     # cria e muda para a nova branch
+# trabalha e faz commits nessa branch
+git add .
+git commit -m "Nova funcionalidade X"
+
+
+Atualizar a branch com as mudanças da main
+
+Antes de fazer merge, é importante atualizar sua branch:
+
+git checkout main
+git pull                         # atualiza a main
+git checkout nova-feature
+git merge main                   # atualiza a branch com o que mudou na main
+
+
+Finalizar e enviar a branch
+git checkout main
+git merge nova-feature           # une o código da branch
+git push origin main             # envia ao GitHub
+
+Dica: apagar branch antiga localmente
+git branch -d nova-feature
+
+Remover branch do GitHub:
+git push origin --delete nome-da-branch
+
+git fetch -p - atualiza a lista local de branches remotas, removendo referências antigas.
+git branch -a - Para listar todas as branches (locais + remotas):
+
+
+
+
+🔧 Passo a passo completo para criar uma branch nova e fazer push no github
+
+Crie e entre na nova branch
+
+git checkout -b minha-branch
+
+Isso cria e troca automaticamente para ela.
+
+Adicione e faça commit das mudanças
+
+git add .
+git commit -m "Implementa nova funcionalidade X"
+
+
+Agora as alterações estão salvas no seu repositório local, dentro da branch.
+
+Suba a branch para o GitHub
+
+git push -u origin minha-branch
+
+
+Explicando:
+
+-u (ou --set-upstream) liga a sua branch local à branch remota no GitHub.
+
+origin é o nome padrão do repositório remoto.
+
+minha-branch é o nome da sua branch.
+
+👉 Depois desse primeiro push, você pode usar apenas:
+
+git push
